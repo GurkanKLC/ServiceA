@@ -1,0 +1,41 @@
+﻿version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # MongoDB varsayılan portu
+    volumes:
+      - mongodb_data:/data/db # MongoDB verilerini kalıcı hale getirmek için
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root # MongoDB root kullanıcı adı
+      MONGO_INITDB_ROOT_PASSWORD: example # MongoDB root şifresi
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /path/to/local/dаta:/root/redis
+      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PASSWORD=12345
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ'nun standart AMQP portu
+      - "15672:15672" # RabbitMQ Management Plugin'in web arayüzü portu
+    environment:
+      RABBITMQ_DEFAULT_USER: user  # Varsayılan kullanıcı adı
+      RABBITMQ_DEFAULT_PASS: password  # Varsayılan şifre
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  mongodb_data:
+  rabbitmq_data:
+    driver: local

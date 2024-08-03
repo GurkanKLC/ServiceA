@@ -1,0 +1,59 @@
+﻿@model List<ConfigurationSetting>
+@{
+}
+<h2 class="text-center mb-5">Servis Ayarları</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="ConfigurationSetting" asp-action="Create">Yeni Ayar Ekle</a>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+<input type="text" id="search" class="form-control" placeholder="Search by Name" />
+
+<table class="table" id="configTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>IsActive</th>
+            <th>ApplicationName</th>
+            <th>işlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var setting in Model)
+        {
+            <tr>
+                <td>@setting.Id</td>
+                <td>@setting.Name</td>
+                <td>@setting.Type</td>
+                <td>@setting.Value</td>
+                <td>@setting.IsActive</td>
+                <td>@setting.ApplicationName</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="ConfigurationSetting" asp-action="Edit" asp-route-id="@setting.Id">Düzenle</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="ConfigurationSetting" onclick="return confirm('Silmek istiyor musunuz?')" asp-action="Delete" asp-route-id="@setting.Id">Kaldır</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#configTable tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

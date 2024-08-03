@@ -1,0 +1,62 @@
+﻿@model ConfigurationSettingDto
+@{
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <h2 class="text-center mb-5">Yeni Ayar </h2>
+        <form method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Name"></input>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Type</label>
+                <div class="col-sm-8">
+                    <select id="type" class="form-select" asp-for="Type">
+                        <option value="integer">Integer</option>
+                        <option value="double">Double</option>
+                        <option value="string">String</option>
+                        <option value="boolean">Boolean</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Value</label>
+                <div class="col-sm-8">
+                    <input id="inputValue" class="form-control" asp-for="Value"></input>
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">IsActive</label>
+                <div class="col-sm-8">
+                    <select id="isActive" class="form-select" asp-for="IsActive">
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">ApplicationName</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="ApplicationName"></input>
+                    <span asp-validation-for="ApplicationName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="ConfigurationSetting" asp-action="Index" role="button">İptal</a>
+                </div>
+            </div>
+        </form>
+    </div>
+   
+</div>
